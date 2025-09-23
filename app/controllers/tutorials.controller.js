@@ -4,7 +4,7 @@ const Tutorial = db.tutorials;
 
 exports.create = async (req, res) => {
     try {
-        if (!req.body.title || req.body.title.trim().length === 0) {
+        if (!req.body.title.trim()) {
             res.status(400).send({ message: "Title cannot be empty" });
             return;
         }
@@ -12,8 +12,8 @@ exports.create = async (req, res) => {
 
         if (!isDuplicateTitle?.length) {
             const tutorial = new Tutorial({
-                title: req.body.title,
-                description: req.body.description,
+                title: req.body.title.trim(),
+                description: req.body.description.trim(),
                 published: req.body.published ? req.body.published : false
             });
 
@@ -24,7 +24,7 @@ exports.create = async (req, res) => {
             res.send({ message: "Title already exists" })
         }
     } catch (error) {
-        console.log("Error ", error);
+        console.error(error);
     }
 
 }
