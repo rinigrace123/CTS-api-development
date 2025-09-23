@@ -1,10 +1,11 @@
+const { tutorialValidator } = require("../utils/validations.js");
+
 module.exports = app => {
   const tutorials = require("../controllers/tutorials.controller.js");
 
   var router = require("express").Router();
-
   // Create a new Tutorial
-  router.post("/", tutorials.create);
+  router.post("/",tutorialValidator, tutorials.create);
 
   // Retrieve all Tutorials
   router.get("/", tutorials.findAll);
