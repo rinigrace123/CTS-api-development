@@ -1,6 +1,5 @@
-const db = require("../models");
-const Tutorial = db.tutorials;
+const { tutorials } = require("../models")
 
-exports.checkDuplicateTitle = (title) =>{
-    Tutorial.find({'title':title})
+exports.checkDuplicateTitles = (title) => {
+    return tutorials.find({'title': title})   
 }
